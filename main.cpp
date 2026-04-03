@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 23 | Christine
+// COMSC-210 | Lab 23 | Christine Susic
 
 #include <iostream>
 #include <fstream>
@@ -40,12 +40,27 @@ int main() {
         Goat tmp(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
         trip.push_back(tmp);
     }
+    
+    int one = main_menu();
 
     main_menu();
     select_goat(trip);
-    add_goat(trip, names, colors);
-    delete_goat(trip);
-    display_trip(trip);
+    //if choice1 equals 1(add a goat), add a Goat object
+    if (one == 1) {
+        add_goat(trip, names, colors);
+    }
+    //if choice1 equals 2(delete a goat), delete a Goat object
+    if (one == 2) {
+        delete_goat(trip);
+    }
+    //if choice1 equals 3(list goats), the list of Goat objects is displayed
+    if (one == 3) {
+        display_trip(trip);
+    }
+    //if ch
+    if (one == 4) {
+        exit();
+    }
 
     return 0;
 }
@@ -78,6 +93,7 @@ int main_menu() {
 int select_goat(list<Goat> trip) {
     int choice2;
     //output the goat names list
+    cout << endl;
     for (auto val : trip) {
     cout << val.get_name();
     cout << " (" << val.get_age() << ", ";
@@ -99,19 +115,19 @@ int select_goat(list<Goat> trip) {
     return choice2; 
 };
 
+//add a Goat object to the trip
 void add_goat(list<Goat> &trip, string [], string []) {
-    //add a Goat object to the trip
-    for (auto val : trip)
     trip.emplace_back("g", 1, "jh");
 };
 
+//delete a Goat object from the trip
 void delete_goat(list<Goat> &trip) {
-    //delete a Goat object from the trip
     trip.pop_back();
 };
 
+//output the updated goat names list
 void display_trip(list<Goat> trip) {
-    //output the goat names list
+    cout << endl;
     for (auto val : trip) {
     cout << val.get_name();
     cout << " (" << val.get_age() << ", ";
