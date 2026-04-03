@@ -39,6 +39,11 @@ int main() {
         Goat tmp(names[rand() % SZ_NAMES], rand() % 20 + 1);
         trip.push_back(tmp);
     }
+    
+    for (int i = 0; i < 3; i++) {
+        Goat tmp(colors[rand() % SZ_COLORS], rand() % 20 + 1);
+        trip.push_back(tmp);
+    }
 
     //main_menu();
     //select_goat(list<Goat> trip);
@@ -105,6 +110,9 @@ void delete_goat(list<Goat> &trip) {
 
 void display_trip(list<Goat> trip) {
     //output the goat names list
-    for (auto val : trip)
-        cout << "[" << val.get_name() << endl;
+    for (auto val : trip) {
+    cout << val.get_name();
+    cout << "(" << val.get_age() << ",";
+    cout << val.get_color() << ")" << endl;
+    }
 };
