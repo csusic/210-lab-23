@@ -41,43 +41,35 @@ int main() {
         Goat tmp(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
         trip.push_back(tmp);
     }
-    
-    int one = main_menu();
-    
-    //input choice
-        cin >> choice4;
-        //input validation
-        while (choice4 < 1 or choice4 > 4 or cin.fail()) {
-            if (cin.fail()) {
-                cin.clear(); //clears the cin.fail flag
-                cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
-            }
-            cout << "ERROR. Please enter 1-4. ";
-            cin >> choice4;
-        }
 
-    main_menu();
-    //if choice1 equals 1(add a goat)
-    if (one == 1) {
+    //output main menu and get choice from main menu
+    int choice = main_menu();
+
+    //if choice equals 1(add a goat)
+    if (choice == 1) {
         //add a Goat object
         add_goat(trip, names, colors);
-        //display updated Goat object
+        //select which Goat
         select_goat(trip);
+        //display updated Goat object
+        display_trip(trip);
     }
     //if choice1 equals 2(delete a goat)
-    if (one == 2) {
+    if (choice == 2) {
         //delete a Goat object
         delete_goat(trip);
-        //display updated Goat object
+        //select which Goat
         select_goat(trip);
+        //display updated Goat object
+        display_trip(trip);
     }
     //if choice1 equals 3(list goats)
-    if (one == 3) {
-        //the list of Goat objects is displayed
+    if (choice == 3) {
+        ////display Goat object
         display_trip(trip);
     }
     //if choice1 equals 4(quit)
-    if (one == 4) {
+    if (choice == 4) {
         //the Goat Manager quits
         exit(0);
     }
@@ -87,31 +79,28 @@ int main() {
 
 int main_menu() {
     //output menu
+    cout << "*** GOAT MANAGER 3001 ***" << endl;
+    cout << "[1] Add a goat" << endl;
+    cout << "[2] Delete a goat" << endl;
+    cout << "[3] List goats" << endl;
+    cout << "[4] Quit" << endl;
+    cout << "Choice --> ";
+    //input choice
     int choice1;
-    //for (int i = 0; i < 1; i++) {
-        cout << "*** GOAT MANAGER 3001 ***" << endl;
-        cout << "[1] Add a goat" << endl;
-        cout << "[2] Delete a goat" << endl;
-        cout << "[3] List goats" << endl;
-        cout << "[4] Quit" << endl;
-        cout << "Choice --> ";
-        //input choice
-        cin >> choice1;
-        //input validation
-        while (choice1 < 1 or choice1 > 4 or cin.fail()) {
-            if (cin.fail()) {
-                cin.clear(); //clears the cin.fail flag
-                cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
-            }
-            cout << "ERROR. Please enter 1-4. ";
-            cin >> choice1;
+    cin >> choice1;
+    //input validation
+    while (choice1 < 1 or choice1 > 4 or cin.fail()) {
+        if (cin.fail()) {
+            cin.clear(); //clears the cin.fail flag
+            cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
         }
-    //}
+        cout << "ERROR. Please enter 1-4. ";
+        cin >> choice1;
+    }
     return choice1;
 }
 
 int select_goat(list<Goat> trip) {
-    int choice2;
     //output the goat names list
     cout << endl;
     for (auto val : trip) {
@@ -120,8 +109,9 @@ int select_goat(list<Goat> trip) {
     cout << val.get_color() << ")" << endl;
     }
     //select goat number
-    cout << "Choice --> ";
+    cout << "Select which goat --> ";
     //input choice
+    int choice2;
     cin >> choice2;
     //input validation
     while (choice2 < 1 or choice2 > 8 or cin.fail()) {
@@ -148,6 +138,7 @@ void delete_goat(list<Goat> &trip) {
 //output the updated goat names list
 void display_trip(list<Goat> trip) {
     cout << endl;
+    cout << "Final Goat List: " << endl;
     for (auto val : trip) {
     cout << val.get_name();
     cout << " (" << val.get_age() << ", ";
