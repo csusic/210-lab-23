@@ -44,28 +44,23 @@ int main() {
 
     //output main menu and get choice from main menu
     int choice = main_menu();
-
     //if choice equals 1(add a goat)
     if (choice == 1) {
         //add a Goat object
         add_goat(trip, names, colors);
-        //select which Goat
-        select_goat(trip);
-        //display updated Goat object
+        //display Goat object
         display_trip(trip);
     }
     //if choice1 equals 2(delete a goat)
     if (choice == 2) {
         //delete a Goat object
         delete_goat(trip);
-        //select which Goat
-        select_goat(trip);
         //display updated Goat object
         display_trip(trip);
     }
     //if choice1 equals 3(list goats)
     if (choice == 3) {
-        ////display Goat object
+        //display Goat object
         display_trip(trip);
     }
     //if choice1 equals 4(quit)
@@ -79,6 +74,7 @@ int main() {
 
 int main_menu() {
     //output menu
+    int choice1;
     cout << "*** GOAT MANAGER 3001 ***" << endl;
     cout << "[1] Add a goat" << endl;
     cout << "[2] Delete a goat" << endl;
@@ -86,7 +82,6 @@ int main_menu() {
     cout << "[4] Quit" << endl;
     cout << "Choice --> ";
     //input choice
-    int choice1;
     cin >> choice1;
     //input validation
     while (choice1 < 1 or choice1 > 4 or cin.fail()) {
@@ -127,7 +122,19 @@ int select_goat(list<Goat> trip) {
 
 //add a Goat object to the trip
 void add_goat(list<Goat> &trip, string [], string []) {
-    trip.emplace_back("g", 1, "jh");
+    //read & populate arrays for names and colors
+    ifstream fin("names.txt");
+    string names[SZ_NAMES];
+    int i = 0;
+    while (fin >> names[i++]);
+    fin.close();
+    ifstream fin1("colors.txt");
+    string colors[SZ_COLORS];
+    i = 0;
+    while (fin1 >> colors[i++]);
+    fin1.close();
+    //put random names, ages, and colors for each of them
+    trip.emplace_back(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
 };
 
 //delete a Goat object from the trip
@@ -138,7 +145,7 @@ void delete_goat(list<Goat> &trip) {
 //output the updated goat names list
 void display_trip(list<Goat> trip) {
     cout << endl;
-    cout << "Final Goat List: " << endl;
+    cout << "Goat List: " << endl;
     for (auto val : trip) {
     cout << val.get_name();
     cout << " (" << val.get_age() << ", ";
