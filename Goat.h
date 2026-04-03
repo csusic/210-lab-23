@@ -1,3 +1,4 @@
+// COMSC-210 | Lab 23 | Christine Susic
 // Goat.h
 
 #ifndef GOAT_H
