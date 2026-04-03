@@ -139,7 +139,10 @@ void add_goat(list<Goat> &trip, string [], string []) {
 
 //delete a Goat object from the trip
 void delete_goat(list<Goat> &trip) {
-    trip.pop_back();
+    int goat_choice = select_goat(trip);
+    auto it = trip.begin();
+    advance(it, goat_choice);
+    trip.erase(it);
 };
 
 //output the updated goat names list
