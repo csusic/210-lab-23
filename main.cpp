@@ -35,38 +35,40 @@ int main() {
     //create a list of Goat objects
     list<Goat> trip;
     
-    //create three Goat objects and put them into the list
-    for (int i = 0; i < 3; i++) {
+    //create eight Goat objects and put them into the list
+    for (int i = 0; i < 8; i++) {
         //put random names, ages, and colors for each of them
         Goat tmp(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
         trip.push_back(tmp);
     }
 
-    //output main menu and get choice from main menu
-    int choice = main_menu();
-    //if choice equals 1(add a goat)
-    if (choice == 1) {
-        //add a Goat object
-        add_goat(trip, names, colors);
-        //display Goat object
-        display_trip(trip);
-    }
-    //if choice1 equals 2(delete a goat)
-    if (choice == 2) {
-        //delete a Goat object
-        delete_goat(trip);
-        //display updated Goat object
-        display_trip(trip);
-    }
-    //if choice1 equals 3(list goats)
-    if (choice == 3) {
-        //display Goat object
-        display_trip(trip);
-    }
-    //if choice1 equals 4(quit)
-    if (choice == 4) {
-        //the Goat Manager quits
-        exit(0);
+    for (int i = 0; i < 5; i++) {
+        //output main menu and get choice from main menu
+        int choice = main_menu();
+        //if choice equals 1(add a goat)
+        if (choice == 1) {
+            //add a Goat object
+            add_goat(trip, names, colors);
+            //display Goat object
+            display_trip(trip);
+        }
+        //if choice1 equals 2(delete a goat)
+        if (choice == 2) {
+            //delete a Goat object
+            delete_goat(trip);
+            //display updated Goat object
+            display_trip(trip);
+        }
+        //if choice1 equals 3(list goats)
+        if (choice == 3) {
+            //display Goat object
+            display_trip(trip);
+        }
+        //if choice1 equals 4(quit)
+        if (choice == 4) {
+            //the Goat Manager quits
+            exit(0);
+        }
     }
 
     return 0;
@@ -75,6 +77,7 @@ int main() {
 int main_menu() {
     //output menu
     int choice1;
+    cout << endl;
     cout << "*** GOAT MANAGER 3001 ***" << endl;
     cout << "[1] Add a goat" << endl;
     cout << "[2] Delete a goat" << endl;
@@ -97,14 +100,9 @@ int main_menu() {
 
 int select_goat(list<Goat> trip) {
     //output the goat names list
-    cout << endl;
-    for (auto val : trip) {
-    cout << val.get_name();
-    cout << " (" << val.get_age() << ", ";
-    cout << val.get_color() << ")" << endl;
-    }
+    display_trip(trip);
     //select goat number
-    cout << "Select which goat --> ";
+    cout << "Select which goat to delete --> ";
     //input choice
     int choice2;
     cin >> choice2;
@@ -139,19 +137,23 @@ void add_goat(list<Goat> &trip, string [], string []) {
 
 //delete a Goat object from the trip
 void delete_goat(list<Goat> &trip) {
+    //output select goat list and get choice from select goat
     int goat_choice = select_goat(trip);
     auto it = trip.begin();
-    advance(it, goat_choice);
-    trip.erase(it);
+    goat_choice--; //account for list starting at zero
+    advance(it, goat_choice); //advance to choice
+    trip.erase(it); //erase choice
 };
 
 //output the updated goat names list
 void display_trip(list<Goat> trip) {
     cout << endl;
     cout << "Goat List: " << endl;
+    int counter = 1;
     for (auto val : trip) {
-    cout << val.get_name();
-    cout << " (" << val.get_age() << ", ";
-    cout << val.get_color() << ")" << endl;
+        cout << "[" << counter << "] " << val.get_name();
+        cout << " (" << val.get_age() << ", ";
+        cout << val.get_color() << ")" << endl;
+        counter++;
     }
 };
