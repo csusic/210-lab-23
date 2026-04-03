@@ -31,6 +31,12 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    main_menu();
+
+    return 0;
+}
+
+int main_menu() {
     //output menu
     int choice;
     for (int i = 0; i < 5; i++) {
@@ -39,13 +45,18 @@ int main() {
         cout << "[2] Delete a goat" << endl;
         cout << "[3] List goats" << endl;
         cout << "[4] Quit" << endl;
-        cout << "Choice -->";
+        cout << "Choice --> ";
+        //input choice
         cin >> choice;
+        //input validation
+        while (choice < 1 or choice > 4 or cin.fail()) {
+            if (cin.fail()) {
+                cin.clear(); //clears the cin.fail flag
+                cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
+            }
+            cout << "ERROR. Please enter 1-4. ";
+            cin >> choice;
+        }
     }
-
-    return 0;
-}
-
-int main_menu() {
-    
+    return choice;
 }
