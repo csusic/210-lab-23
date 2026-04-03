@@ -36,22 +36,22 @@ int main() {
     
     //create three Goat objects and put them into the list
     for (int i = 0; i < 3; i++) {
-        Goat tmp(names[rand() % SZ], rand() % 20 + 1);
+        Goat tmp(names[rand() % SZ_NAMES], rand() % 20 + 1);
         trip.push_back(tmp);
     }
 
-    main_menu();
-    select_goat(list<Goat> trip);
-    add_goat(list<Goat> &trip, string [], string []);
-    delete_goat(list<Goat> &trip);
-    display_trip(list<Goat> trip);
+    //main_menu();
+    //select_goat(list<Goat> trip);
+    //add_goat(list<Goat> &trip, string [], string []);
+    //delete_goat(list<Goat> &trip);
+    display_trip(trip);
 
     return 0;
 }
 
 int main_menu() {
     //output menu
-    int choice;
+    int choice1;
     for (int i = 0; i < 5; i++) {
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "[1] Add a goat" << endl;
@@ -60,26 +60,39 @@ int main_menu() {
         cout << "[4] Quit" << endl;
         cout << "Choice --> ";
         //input choice
-        cin >> choice;
+        cin >> choice1;
         //input validation
-        while (choice < 1 or choice > 4 or cin.fail()) {
+        while (choice1 < 1 or choice1 > 4 or cin.fail()) {
             if (cin.fail()) {
                 cin.clear(); //clears the cin.fail flag
                 cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
             }
             cout << "ERROR. Please enter 1-4. ";
-            cin >> choice;
+            cin >> choice1;
         }
     }
-    return choice;
+    return choice1;
 }
 
 int select_goat(list<Goat> trip) {
-    for (int i = 0; i < 5; i++) {
-        cout << "[" << i << "]";
-        cout << name << "(" << age << ",";
-        cout << color << ")" << endl;
+    //output menu
+    int choice2;
+    for (int i = 1; i < 5; i++) {
+        cout << "[" << i << "]" << endl;
+        cout << "[" << i << "]" << endl;
+        cout << "[" << i << "]" << endl;
+        cout << "[" << i << "]" << endl;
+        cout << "Choice --> ";
+        //input choice
+        cin >> choice2;
     }
+    for (auto val : trip) {
+        int i = 0;
+        i++;
+        cout << i << endl;
+        cout << "\t" << val.get_name() << endl;
+    }
+    return choice2; 
 };
 
 void add_goat(list<Goat> &trip, string [], string []) {
@@ -93,5 +106,5 @@ void delete_goat(list<Goat> &trip) {
 void display_trip(list<Goat> trip) {
     //output the goat names list
     for (auto val : trip)
-        cout << "\t" << val.get_name() << endl;
+        cout << "[" << val.get_name() << endl;
 };
