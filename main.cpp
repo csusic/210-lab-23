@@ -40,15 +40,11 @@ int main() {
         Goat tmp(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
         trip.push_back(tmp);
     }
-    
-    for (int i = 0; i < 1; i++) {
-        trip.emplace_back(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
-    }
 
-    //main_menu();
-    //select_goat(trip);
-    //add_goat(&trip, names, colors);
-    //delete_goat(list<Goat> &trip);
+    main_menu();
+    select_goat(trip);
+    add_goat(trip, names, colors);
+    delete_goat(trip);
     display_trip(trip);
 
     return 0;
@@ -57,7 +53,7 @@ int main() {
 int main_menu() {
     //output menu
     int choice1;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 1; i++) {
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "[1] Add a goat" << endl;
         cout << "[2] Delete a goat" << endl;
@@ -104,11 +100,14 @@ int select_goat(list<Goat> trip) {
 };
 
 void add_goat(list<Goat> &trip, string [], string []) {
-
+    //add a Goat object to the trip
+    for (auto val : trip)
+    trip.emplace_back("g", 1, "jh");
 };
 
 void delete_goat(list<Goat> &trip) {
-    
+    //delete a Goat object from the trip
+    trip.pop_back();
 };
 
 void display_trip(list<Goat> trip) {
