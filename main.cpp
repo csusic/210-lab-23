@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 23 | Christine Susic
+// COMSC-210 | Lab 23 | Christine
 
 #include <iostream>
 #include <fstream>
