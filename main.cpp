@@ -9,11 +9,11 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
 int main_menu();
+int select_goat(list<Goat> trip);
+void add_goat(list<Goat> &trip, string [], string []);
+void delete_goat(list<Goat> &trip);
+void display_trip(list<Goat> trip);
 
 int main() {
     srand(time(0));
@@ -30,8 +30,21 @@ int main() {
     i = 0;
     while (fin1 >> colors[i++]);
     fin1.close();
+    
+    //create a list of Goat objects
+    list<Goat> trip;
+    
+    //create three Goat objects and put them into the list
+    for (int i = 0; i < 3; i++) {
+        Goat tmp(names[rand() % SZ], rand() % 20 + 1);
+        trip.push_back(tmp);
+    }
 
     main_menu();
+    select_goat(list<Goat> trip);
+    add_goat(list<Goat> &trip, string [], string []);
+    delete_goat(list<Goat> &trip);
+    display_trip(list<Goat> trip);
 
     return 0;
 }
@@ -60,3 +73,25 @@ int main_menu() {
     }
     return choice;
 }
+
+int select_goat(list<Goat> trip) {
+    for (int i = 0; i < 5; i++) {
+        cout << "[" << i << "]";
+        cout << name << "(" << age << ",";
+        cout << color << ")" << endl;
+    }
+};
+
+void add_goat(list<Goat> &trip, string [], string []) {
+    
+};
+
+void delete_goat(list<Goat> &trip) {
+    
+};
+
+void display_trip(list<Goat> trip) {
+    //output the goat names list
+    for (auto val : trip)
+        cout << "\t" << val.get_name() << endl;
+};
