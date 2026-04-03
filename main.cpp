@@ -37,15 +37,19 @@ int main() {
     //create three Goat objects and put them into the list
     for (int i = 0; i < 3; i++) {
         //put random names, ages, and colors for each of them
-        Goat tmp(names[rand() % SZ_NAMES], rand() % 20 + 1, colors[rand() % SZ_COLORS]);
+        Goat tmp(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
         trip.push_back(tmp);
+    }
+    
+    for (int i = 0; i < 1; i++) {
+        trip.emplace_back(names[rand() % SZ_NAMES], rand() % MAX_AGE + 0, colors[rand() % SZ_COLORS]);
     }
 
     //main_menu();
-    select_goat(trip);
-    //add_goat(list<Goat> &trip, string [], string []);
+    //select_goat(trip);
+    //add_goat(&trip, names, colors);
     //delete_goat(list<Goat> &trip);
-    //display_trip(trip);
+    display_trip(trip);
 
     return 0;
 }
@@ -100,7 +104,7 @@ int select_goat(list<Goat> trip) {
 };
 
 void add_goat(list<Goat> &trip, string [], string []) {
-    
+
 };
 
 void delete_goat(list<Goat> &trip) {
