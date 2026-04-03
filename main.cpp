@@ -87,7 +87,7 @@ int main_menu() {
     //input choice
     cin >> choice1;
     //input validation
-    while (choice1 < 1 or choice1 > 4 or cin.fail()) {
+    while (choice1 < 1 || choice1 > 4 || cin.fail()) {
         if (cin.fail()) {
             cin.clear(); //clears the cin.fail flag
             cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
@@ -107,7 +107,7 @@ int select_goat(list<Goat> trip) {
     int choice2;
     cin >> choice2;
     //input validation
-    while (choice2 < 1 or choice2 > 8 or cin.fail()) {
+    while (choice2 < 1 || choice2 > 8 || cin.fail()) {
         if (cin.fail()) {
             cin.clear(); //clears the cin.fail flag
             cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
