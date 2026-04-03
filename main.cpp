@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <cstdlib>
 #include "Goat.h"
 using namespace std;
 
@@ -42,24 +43,43 @@ int main() {
     }
     
     int one = main_menu();
+    
+    //input choice
+        cin >> choice4;
+        //input validation
+        while (choice4 < 1 or choice4 > 4 or cin.fail()) {
+            if (cin.fail()) {
+                cin.clear(); //clears the cin.fail flag
+                cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
+            }
+            cout << "ERROR. Please enter 1-4. ";
+            cin >> choice4;
+        }
 
     main_menu();
-    select_goat(trip);
-    //if choice1 equals 1(add a goat), add a Goat object
+    //if choice1 equals 1(add a goat)
     if (one == 1) {
+        //add a Goat object
         add_goat(trip, names, colors);
+        //display updated Goat object
+        select_goat(trip);
     }
-    //if choice1 equals 2(delete a goat), delete a Goat object
+    //if choice1 equals 2(delete a goat)
     if (one == 2) {
+        //delete a Goat object
         delete_goat(trip);
+        //display updated Goat object
+        select_goat(trip);
     }
-    //if choice1 equals 3(list goats), the list of Goat objects is displayed
+    //if choice1 equals 3(list goats)
     if (one == 3) {
+        //the list of Goat objects is displayed
         display_trip(trip);
     }
-    //if ch
+    //if choice1 equals 4(quit)
     if (one == 4) {
-        exit();
+        //the Goat Manager quits
+        exit(0);
     }
 
     return 0;
@@ -68,7 +88,7 @@ int main() {
 int main_menu() {
     //output menu
     int choice1;
-    for (int i = 0; i < 1; i++) {
+    //for (int i = 0; i < 1; i++) {
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "[1] Add a goat" << endl;
         cout << "[2] Delete a goat" << endl;
@@ -86,7 +106,7 @@ int main_menu() {
             cout << "ERROR. Please enter 1-4. ";
             cin >> choice1;
         }
-    }
+    //}
     return choice1;
 }
 
