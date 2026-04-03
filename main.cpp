@@ -36,20 +36,16 @@ int main() {
     
     //create three Goat objects and put them into the list
     for (int i = 0; i < 3; i++) {
-        Goat tmp(names[rand() % SZ_NAMES], rand() % 20 + 1);
-        trip.push_back(tmp);
-    }
-    
-    for (int i = 0; i < 3; i++) {
-        Goat tmp(colors[rand() % SZ_COLORS], rand() % 20 + 1);
+        //put random names, ages, and colors for each of them
+        Goat tmp(names[rand() % SZ_NAMES], rand() % 20 + 1, colors[rand() % SZ_COLORS]);
         trip.push_back(tmp);
     }
 
     //main_menu();
-    //select_goat(list<Goat> trip);
+    select_goat(trip);
     //add_goat(list<Goat> &trip, string [], string []);
     //delete_goat(list<Goat> &trip);
-    display_trip(trip);
+    //display_trip(trip);
 
     return 0;
 }
@@ -57,7 +53,7 @@ int main() {
 int main_menu() {
     //output menu
     int choice1;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 2; i++) {
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "[1] Add a goat" << endl;
         cout << "[2] Delete a goat" << endl;
@@ -80,22 +76,25 @@ int main_menu() {
 }
 
 int select_goat(list<Goat> trip) {
-    //output menu
     int choice2;
-    for (int i = 1; i < 5; i++) {
-        cout << "[" << i << "]" << endl;
-        cout << "[" << i << "]" << endl;
-        cout << "[" << i << "]" << endl;
-        cout << "[" << i << "]" << endl;
-        cout << "Choice --> ";
-        //input choice
-        cin >> choice2;
-    }
+    //output the goat names list
     for (auto val : trip) {
-        int i = 0;
-        i++;
-        cout << i << endl;
-        cout << "\t" << val.get_name() << endl;
+    cout << val.get_name();
+    cout << " (" << val.get_age() << ", ";
+    cout << val.get_color() << ")" << endl;
+    }
+    //select goat number
+    cout << "Choice --> ";
+    //input choice
+    cin >> choice2;
+    //input validation
+    while (choice2 < 1 or choice2 > 8 or cin.fail()) {
+        if (cin.fail()) {
+            cin.clear(); //clears the cin.fail flag
+            cin.ignore(1000, '\n'); //clears the buffer of the bad char+endl
+        }
+        cout << "ERROR. Please enter 1-8. ";
+        cin >> choice2;
     }
     return choice2; 
 };
@@ -112,7 +111,7 @@ void display_trip(list<Goat> trip) {
     //output the goat names list
     for (auto val : trip) {
     cout << val.get_name();
-    cout << "(" << val.get_age() << ",";
+    cout << " (" << val.get_age() << ", ";
     cout << val.get_color() << ")" << endl;
     }
 };
